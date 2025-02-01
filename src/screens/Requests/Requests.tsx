@@ -180,6 +180,7 @@ const Requests = (): JSX.Element => {
   /**
    * Loads more requests when scrolling to the bottom of the page.
    */
+
   /* istanbul ignore next */
   const loadMoreRequests = (): void => {
     setIsLoadingMore(true);
@@ -263,8 +264,9 @@ const Requests = (): JSX.Element => {
           </div>
         </div>
       </div>
+
       {!isLoading && orgsData?.organizationsConnection.length === 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-NoOrgs">
           <h3 className="m-0">{t('noOrgErrorTitle')}</h3>
           <h6 className="text-secondary">{t('noOrgErrorDescription')}</h6>
         </div>
@@ -272,13 +274,13 @@ const Requests = (): JSX.Element => {
         data &&
         displayedRequests.length === 0 &&
         searchByName.length > 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-resultsOrgs">
           <h4 className="m-0">
             {tCommon('noResultsFoundFor')} &quot;{searchByName}&quot;
           </h4>
         </div>
       ) : !isLoading && data && displayedRequests.length === 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-RequestOrgs">
           <h4>{t('noRequestsFound')}</h4>
         </div>
       ) : (
@@ -304,7 +306,12 @@ const Requests = (): JSX.Element => {
                 </div>
               }
             >
-              <Table className={styles.requestsTable} responsive borderless>
+              <Table
+                data-testid="empty-organisation"
+                className={styles.requestsTable}
+                responsive
+                borderless
+              >
                 <thead>
                   <tr>
                     {headerTitles.map((title: string, index: number) => {

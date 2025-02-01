@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import aboutImg from 'assets/images/defaultImg.png';
 import styles from './PeopleCard.module.css';
 
