@@ -264,7 +264,7 @@ const Requests = (): JSX.Element => {
         </div>
       </div>
       {!isLoading && orgsData?.organizationsConnection.length === 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-NoOrgs">
           <h3 className="m-0">{t('noOrgErrorTitle')}</h3>
           <h6 className="text-secondary">{t('noOrgErrorDescription')}</h6>
         </div>
@@ -272,13 +272,13 @@ const Requests = (): JSX.Element => {
         data &&
         displayedRequests.length === 0 &&
         searchByName.length > 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-resultsOrgs">
           <h4 className="m-0">
             {tCommon('noResultsFoundFor')} &quot;{searchByName}&quot;
           </h4>
         </div>
       ) : !isLoading && data && displayedRequests.length === 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-RequestOrgs">
           <h4>{t('noRequestsFound')}</h4>
         </div>
       ) : (
@@ -287,6 +287,8 @@ const Requests = (): JSX.Element => {
             <TableLoader headerTitles={headerTitles} noOfRows={perPageResult} />
           ) : (
             <InfiniteScroll
+            
+              data-testid="requests-list"
               dataLength={displayedRequests.length ?? 0}
               next={loadMoreRequests}
               loader={
@@ -297,14 +299,13 @@ const Requests = (): JSX.Element => {
               }
               hasMore={hasMore}
               className={styles.listTable}
-              data-testid="requests-list"
               endMessage={
                 <div className={'w-100 text-center my-4'}>
                   <h5 className="m-0 ">{tCommon('endOfResults')}</h5>
                 </div>
               }
             >
-              <Table className={styles.requestsTable} responsive borderless>
+              <Table data-testid="empty-organisation" className={styles.requestsTable} responsive borderless>
                 <thead>
                   <tr>
                     {headerTitles.map((title: string, index: number) => {
@@ -316,7 +317,7 @@ const Requests = (): JSX.Element => {
                     })}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-testid="requests-table-item">
                   {data &&
                     displayedRequests.map(
                       (request: InterfaceRequestsListItem, index: number) => {

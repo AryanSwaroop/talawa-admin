@@ -1,6 +1,6 @@
 import React, { act } from 'react';
 import { MockedProvider } from '@apollo/react-testing';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import 'jest-localstorage-mock';
 import 'jest-location-mock';
 import { I18nextProvider } from 'react-i18next';
@@ -52,8 +52,42 @@ afterEach(() => {
 });
 
 describe('Testing Requests screen', () => {
+  test('new component should be rendered properly on scroll', async () => {
+    render(
+      <MockedProvider addTypename={false} link={link}>
+        <BrowserRouter>
+          <Provider store={store}>
+            <I18nextProvider i18n={i18nForTest}>
+              <Requests />
+            </I18nextProvider>
+          </Provider>
+        </BrowserRouter>
+      </MockedProvider>,
+    );
+
+    fireEvent.scroll(window, { target: { scrollY: 1000 } });
+    await wait();
+
+    expect(screen.getByTestId('empty-organisation')).toBeInTheDocument;
+
+    const nonrenderElementResult = screen.queryByTestId('empty-resultsOrgs');
+
+    const nonrenderElementRequest = screen.queryByTestId('empty-RequestOrgs');
+
+    const nonrenderElementOrg = screen.queryByTestId('empty-NoOrgs');
+
+    expect(nonrenderElementResult).toBeNull();
+
+    expect(nonrenderElementRequest).toBeNull();
+
+    expect(nonrenderElementOrg).toBeNull();
+
+    
+    await wait();
+    expect(screen.getByTestId('requests-table-item')).toBeInTheDocument();
+  });
+
   test('Component should be rendered properly', async () => {
-    const loadMoreRequests = jest.fn();
     render(
       <MockedProvider addTypename={false} link={link7}>
         <BrowserRouter>
