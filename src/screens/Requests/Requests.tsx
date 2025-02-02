@@ -266,7 +266,7 @@ const Requests = (): JSX.Element => {
         </div>
       </div>
       {!isLoading && orgsData?.organizationsConnection.length === 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-NoOrgs">
           <h3 className="m-0">{t('noOrgErrorTitle')}</h3>
           <h6 className="text-secondary">{t('noOrgErrorDescription')}</h6>
         </div>
@@ -274,17 +274,17 @@ const Requests = (): JSX.Element => {
         data &&
         displayedRequests.length === 0 &&
         searchByName.length > 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-resultsOrgs">
           <h4 className="m-0">
             {tCommon('noResultsFoundFor')} &quot;{searchByName}&quot;
           </h4>
         </div>
       ) : !isLoading && data && displayedRequests.length === 0 ? (
-        <div className={styles.notFound}>
+        <div className={styles.notFound} data-testid="empty-RequestOrgs">
           <h4>{t('noRequestsFound')}</h4>
         </div>
       ) : (
-        <div className={styles.listBox}>
+        <div className={styles.listBox} data-testid="empty-organisation">
           {isLoading ? (
             <TableLoader headerTitles={headerTitles} noOfRows={perPageResult} />
           ) : (
@@ -318,7 +318,7 @@ const Requests = (): JSX.Element => {
                     })}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-testid="requests-table-item">
                   {data &&
                     displayedRequests.map(
                       (request: InterfaceRequestsListItem, index: number) => {
