@@ -620,7 +620,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                       console.log('Admin Approved');
                       setFormState((prevState) => ({
                         ...prevState,
-                        pluginCreationAllowed: e.target.checked,
+                        adminApproved: e.target.checked,
                       }));
                       setisUpdated(true);
                     }}
