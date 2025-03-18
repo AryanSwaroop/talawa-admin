@@ -272,6 +272,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
       >
         <a href="/member">
           <button
+            type="button"
             className={`${styles.featuresBox} ${styles.allRound} flex items-center rounded-lg text-gray-100 transition-colors`}
           >
             <OverviewIcon />
@@ -286,6 +287,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
 
         <a href="/orgList">
           <button
+            type="button"
             className={`${styles.featuresBox} ${styles.allRound} flex items-center rounded-lg text-gray-100 transition-colors`}
           >
             <MemberOrganizationIcon />
@@ -315,6 +317,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
 
         <a href="/orgtags">
           <button
+            type="button"
             className={`${styles.featuresBox} ${styles.allRound} flex items-center rounded-lg text-gray-100 transition-colors`}
           >
             <TagIcon />
@@ -335,6 +338,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
             >
               <h3 className="m-0">{t('personalDetailsHeading')}</h3>
               <Button
+                type="button"
                 variant="light"
                 size="sm"
                 disabled
@@ -666,6 +670,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                     {t('deleteUser')}
                   </label>
                   <Button
+                    type="button"
                     id="deleteUserButton"
                     variant="outline-danger"
                     style={{
