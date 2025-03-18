@@ -594,6 +594,9 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                   <Form.Check
                     className="gap-3 d-flex align-items-center"
                     type="checkbox"
+                    onChange={() => {
+                      console.log('Plugin creation allowed');
+                    }}
                     id="pluginCreationAllowed"
                     label={t('pluginCreationAllowed')}
                     style={{ color: '#495057' }}
@@ -602,6 +605,9 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                 <Col md={12}>
                   <Form.Check
                     className="gap-3 d-flex align-items-center"
+                    onChange={() => {
+                      console.log('Admin Approved');
+                    }}
                     style={{ color: '#495057' }}
                     type="checkbox"
                     id="adminApproved"
