@@ -632,6 +632,7 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                   </label>
                   <button
                     type="button"
+                    data-testid="languageSelectButton"
                     className={`${styles.inputColor} small form-control d-flex align-items-center`}
                     style={{
                       width: 'fit-content',
@@ -642,7 +643,10 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                     }}
                   >
                     <GlobalIcon />
-                    <span>English</span>
+                    <span>
+                      {getLanguageName(formState.naturalLanguageCode) ||
+                        'English'}
+                    </span>
                   </button>
                 </Col>
 
