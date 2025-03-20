@@ -660,7 +660,6 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                   >
                     {t('chooseLanguage')}
                   </label>
-
                   <DynamicDropDown
                     formState={formState}
                     setFormState={setFormState}
