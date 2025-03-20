@@ -21,6 +21,7 @@ import {
   educationGradeEnum,
   maritalStatusEnum,
   genderEnum,
+  languageEnum,
   employmentStatusEnum,
 } from 'utils/formEnumFields';
 import dayjs from 'dayjs';
@@ -88,8 +89,8 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
     postalCode: '',
     state: '',
     workPhoneNumber: '',
-    pluginCreationAllowed: 'false',
-    adminApproved: 'false',
+    adminApproved: '',
+    pluginCreationAllowed: '',
   });
 
   // Mutation to update the user details
@@ -209,8 +210,8 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
       state: formState.state,
       workPhoneNumber: formState.workPhoneNumber,
       avatar: selectedAvatar ? selectedAvatar : avatarFile,
-      pluginCreationAllowed: formState.pluginCreationAllowed,
       adminApproved: formState.adminApproved,
+      pluginCreationAllowed: formState.pluginCreationAllowed,
     };
 
     const input = removeEmptyFields(data);
@@ -389,9 +390,6 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                         type="button"
                         aria-label="Edit profile picture"
                         tabIndex={0}
-                        onKeyDown={(e) =>
-                          e.key === 'Enter' && fileInputRef.current?.click()
-                        }
                       >
                         <Avatar
                           name={formState.name}
@@ -583,7 +581,11 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
               data-testid="tagsAssignedScrollableDiv"
               className={`${styles.cardBody} pe-0`}
             >
-              <h3 className="m-3">This section is for personal details.</h3>
+              <h3>{formState.name}</h3>
+
+              <h3>{formState.city}</h3>
+
+              <h3>{formState.mobilePhoneNumber}</h3>
             </Card.Body>
           </Card>
 
@@ -651,24 +653,19 @@ const MemberDetail: React.FC<MemberDetailProps> = ({ id }): JSX.Element => {
                   >
                     {t('chooseLanguage')}
                   </label>
-                  <button
-                    type="button"
-                    data-testid="languageSelectButton"
-                    className={`${styles.inputColor} small form-control d-flex align-items-center`}
-                    style={{
-                      width: 'fit-content',
-                      gap: '0.5rem',
-                      border: 'solid',
-                      borderWidth: '2px',
-                      borderColor: '#ced4da',
-                    }}
-                  >
+
+                  <span data-testid="languageSelectButton">
                     <GlobalIcon />
-                    <span>
-                      {getLanguageName(formState.naturalLanguageCode) ||
-                        'English'}
-                    </span>
-                  </button>
+                    <DynamicDropDown
+                      formState={formState}
+                      setFormState={setFormState}
+                      fieldOptions={languageEnum}
+                      fieldName="naturalLanguageCode"
+                      handleChange={(e) =>
+                        handleFieldChange('naturalLanguageCode', e.target.value)
+                      }
+                    />
+                  </span>
                 </Col>
 
                 <Col md={7}>
